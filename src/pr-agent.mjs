@@ -23,4 +23,5 @@ if (!OPENAI_API_KEY || !GITHUB_TOKEN) {
   process.exit(1);
 }
 
-await $`docker run --rm -it -e OPENAI.KEY=${OPENAI_API_KEY} -e GITHUB.USER_TOKEN=${GITHUB_TOKEN} codiumai/pr-agent:latest --pr_url ${PR_URL} ${ACTION}`;
+const DOCKER_IMAGE = "codiumai/pr-agent:latest";
+await $`docker run --rm -it -e OPENAI.KEY=${OPENAI_API_KEY} -e GITHUB.USER_TOKEN=${GITHUB_TOKEN} ${DOCKER_IMAGE} --pr_url ${PR_URL} ${ACTION}`;

@@ -91,6 +91,7 @@ async function updateMise() {
     await $`mise install node@16`;
     await $`mise install node@18`;
     await $`mise install node@20`;
+    await $`mise install bun`;
   } catch (e) {
     console.log(e);
   }
@@ -98,8 +99,8 @@ async function updateMise() {
 
 async function pruneDocker() {
   try {
-    await $`echo "y" | docker container prune`;
-    await $`echo "y" | docker image prune --filter "dangling=true" -a`;
+    await $`docker container prune -f`;
+    await $`docker image prune -a -f`;
   } catch (e) {
     console.log(e);
   }

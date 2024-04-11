@@ -6,6 +6,16 @@ const platform = os.platform();
 
 if (platform === "linux") $`sudo whoami`;
 
+async function isCommandInstalled(command) {
+  try {
+    const { stdout, stderr } = await $`which ${command}`;
+    return !stderr && !!stdout;
+  } catch (e) {
+    console.log(`Error checking ${command} installation:`);
+    return false;
+  }
+}
+
 // python
 async function updatePythonPkgs() {
   let pkgs = ["pip", "ruff"];
@@ -55,6 +65,11 @@ async function updateApt() {
 async function updateBrew() {
   if (platform !== "darwin") return;
 
+  if (!(await isCommandInstalled("brew"))) {
+    console.log("brew is not installed. Skipping update.");
+    return;
+  }
+
   try {
     await $`brew update`;
     await $`brew upgrade`;
@@ -65,6 +80,11 @@ async function updateBrew() {
 }
 
 async function updateNvim() {
+  if (!(await isCommandInstalled("nvim"))) {
+    console.log("nvim is not installed. Skipping update.");
+    return;
+  }
+
   try {
     await $`nvim --headless "+Lazy! sync" +qa`;
     await $`nvim --headless "+MasonUpdate" +qa`;
@@ -76,12 +96,19 @@ async function updateNvim() {
 }
 
 async function updateRepos() {
-  try {
-    await $`(cd ${homeDir}/src/github.com/dimdenGD/OldTweetDeck && git pull origin main)`;
-    await $`(cd ${homeDir}/src/github.com/junegunn/fzf && git pull origin master)`;
-    await $`(cd ${homeDir}/Library/Caches/Homebrew/neovim--git && git pull origin master)`;
-  } catch (e) {
-    console.log(e);
+  const repos = [
+    `${homeDir}/src/github.com/dimdenGD/OldTweetDeck`,
+    `${homeDir}/src/github.com/junegunn/fzf`,
+    `${homeDir}/Library/Caches/Homebrew/neovim--git`,
+  ];
+
+  for (const repo of repos) {
+    try {
+      cd(repo);
+      await $`git pull`;
+    } catch (e) {
+      console.log(`Error updating repository ${repo}:`, e);
+    }
   }
 }
 
@@ -98,6 +125,11 @@ async function updateMise() {
 }
 
 async function pruneDocker() {
+  if (!(await isCommandInstalled("docker"))) {
+    console.log("Docker is not installed. Skipping pruning.");
+    return;
+  }
+
   try {
     await $`docker container prune -f`;
     await $`docker image prune -a -f`;

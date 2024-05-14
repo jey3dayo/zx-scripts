@@ -44,8 +44,8 @@ async function updateNodePkgs() {
   ];
 
   try {
-    await $`bun i --global ${pkgs}`;
-    await $`bun -g update`;
+    await $`npm i --global ${pkgs}`;
+    await $`npm -g update`;
   } catch (e) {
     console.log(e);
   }

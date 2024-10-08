@@ -74,6 +74,7 @@ async function updateBrew() {
     await $`brew update`;
     await $`brew upgrade`;
     await $`brew cleanup`;
+    await $`brew bundle dump --global`;
   } catch (e) {
     console.log(e);
   }

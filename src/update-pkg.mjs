@@ -18,7 +18,7 @@ async function isCommandInstalled(command) {
 
 // python
 async function updatePythonPkgs() {
-  let pkgs = ["pip", "ruff"];
+  const pkgs = ["pip", "ruff"];
 
   try {
     await $`pip3 install -U ${pkgs}`;
@@ -32,7 +32,7 @@ async function updatePythonPkgs() {
 
 // node
 async function updateNodePkgs() {
-  let pkgs = [
+  const pkgs = [
     "npm-check-updates",
     "neovim",
     "husky",

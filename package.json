@@ -2,9 +2,12 @@
   "name": "zx-scripts",
   "version": "1.0.0",
   "author": "Your Name",
+  "type": "module",
   "bin": {
     "pr-agent": "./src/pr-agent.mjs",
-    "update-pkg": "./src/update-pkg.mjs"
+    "update-pkg": "./src/update-pkg.mjs",
+    "prune-docker": "./src/prune-docker.mjs",
+    "update-mise": "./src/update-mise.mjs"
   },
   "description": "my package description",
   "license": "ISC",

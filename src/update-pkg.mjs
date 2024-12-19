@@ -1,20 +1,10 @@
-#!/usr/bin/env zx
 import os from "os";
+import { isCommandInstalled, isDockerRunning } from "./common.mjs";
 
 const homeDir = os.homedir();
 const platform = os.platform();
 
 if (platform === "linux") $`sudo whoami`;
-
-async function isCommandInstalled(command) {
-  try {
-    const { stdout, stderr } = await $`which ${command}`;
-    return !stderr && !!stdout;
-  } catch (e) {
-    console.log(`Error checking ${command} installation:`);
-    return false;
-  }
-}
 
 // python
 async function updatePythonPkgs() {
@@ -126,12 +116,12 @@ async function updateMise() {
 }
 
 async function pruneDocker() {
-  if (!(await isCommandInstalled("docker"))) {
-    console.log("Docker is not installed. Skipping pruning.");
-    return;
-  }
-
   try {
+    if (!(await isDockerRunning("docker"))) {
+      console.log("Docker is not running. Skipping pruning.");
+      return;
+    }
+
     await $`docker container prune -f`;
     await $`docker image prune -a -f`;
   } catch (e) {

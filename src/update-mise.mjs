@@ -1,5 +1,3 @@
-#!/usr/bin/env zx
-
 async function isCommandInstalled(command) {
   try {
     const { stdout, stderr } = await $`which ${command}`;
@@ -9,7 +7,6 @@ async function isCommandInstalled(command) {
     return false;
   }
 }
-
 
 async function updateMise() {
   if (!(await isCommandInstalled("mise"))) {

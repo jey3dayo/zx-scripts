@@ -1,5 +1,3 @@
-#!/usr/bin/env zx
-
 const [PR_URL, ACTION] = argv._;
 
 if (!PR_URL) {

@@ -8,7 +8,8 @@
     "prune-docker": "./dist/prune-docker.js",
     "update-all": "./dist/update-all.js",
     "update-package": "./dist/update-package.js",
-    "update-mise": "./dist/update-mise.js"
+    "update-mise": "./dist/update-mise.js",
+    "update-nvim-scripts": "./dist/update-nvim-scripts.js"
   },
   "description": "my package description",
   "license": "ISC",

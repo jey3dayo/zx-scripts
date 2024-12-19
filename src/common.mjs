@@ -120,7 +120,6 @@ export async function updateNvimScripts() {
     await $`nvim --headless "+Lazy! sync" +qa`;
     await $`nvim --headless "+MasonUpdate" +qa`;
     await $`nvim --headless "+TSUpdateSync" +qa`;
-    // await $`brew reinstall neovim`;
   } catch (e) {
     console.log(e);
   }

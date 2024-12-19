@@ -5,8 +5,9 @@
   "type": "module",
   "bin": {
     "pr-agent": "./dist/pr-agent.js",
-    "update-pkg": "./dist/update-pkg.js",
     "prune-docker": "./dist/prune-docker.js",
+    "update-all": "./dist/update-all.js",
+    "update-package": "./dist/update-package.js",
     "update-mise": "./dist/update-mise.js"
   },
   "description": "my package description",

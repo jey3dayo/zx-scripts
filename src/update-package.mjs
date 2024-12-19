@@ -1,6 +1,6 @@
 import os from "node:os";
 import {
-  pruneDocker,
+  platform,
   updateApt,
   updateBrew,
   updateMise,
@@ -10,7 +10,6 @@ import {
   updateRepos,
 } from "./common.mjs";
 
-const platform = os.platform();
 if (platform === "linux") $`sudo whoami`;
 
 await Promise.all([
@@ -22,5 +21,4 @@ await Promise.all([
   updateNvimScripts(),
   updateRepos(),
   updateMise(),
-  pruneDocker(),
 ]);

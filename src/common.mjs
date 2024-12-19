@@ -1,3 +1,6 @@
+export const platform = os.platform();
+export const homeDir = os.homedir();
+
 export async function isCommandInstalled(command) {
   try {
     const { stdout, stderr } = await $`which ${command}`;
@@ -64,6 +67,23 @@ export async function updateApt() {
 }
 
 export async function updateBrew() {
+  if (platform !== "darwin") return;
+
+  if (!(await isCommandInstalled("brew"))) {
+    console.log("brew is not installed. Skipping update.");
+    return;
+  }
+
+  try {
+    await $`brew update`;
+    await $`brew upgrade`;
+    await $`brew bundle dump --global --force`;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function updateAndCleanupBrew() {
   if (platform !== "darwin") return;
 
   if (!(await isCommandInstalled("brew"))) {

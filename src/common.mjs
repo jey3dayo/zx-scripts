@@ -37,6 +37,7 @@ export async function updatePythonPkgs() {
 // node
 export async function updateNodePkgs() {
   const pkgs = [
+    "corepack",
     "npm-check-updates",
     "neovim",
     "husky",

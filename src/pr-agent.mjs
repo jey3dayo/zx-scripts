@@ -2,7 +2,7 @@ const [PR_URL, ACTION] = argv._;
 
 if (!PR_URL) {
   console.error("Error: PR_URL is required.");
-  console.log(`Usage: <PR_URL> [ACTION]`);
+  console.log("Usage: <PR_URL> [ACTION]");
   process.exit(1);
 }
 

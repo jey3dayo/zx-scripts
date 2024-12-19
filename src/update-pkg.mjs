@@ -1,7 +1,5 @@
 import os from "node:os";
 import {
-  isCommandInstalled,
-  isDockerRunning,
   pruneDocker,
   updateApt,
   updateBrew,

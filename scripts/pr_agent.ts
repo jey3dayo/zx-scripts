@@ -28,11 +28,16 @@ const DOCKER_IMAGE = "codiumai/pr-agent:latest";
 
 async function runPrAgent(): Promise<void> {
   const args = [
-    "run", "--rm", "-it",
-    `-e`, `OPENAI.KEY=${OPENAI_API_KEY}`,
-    `-e`, `GITHUB.USER_TOKEN=${GITHUB_TOKEN}`,
+    "run",
+    "--rm",
+    "-it",
+    `-e`,
+    `OPENAI.KEY=${OPENAI_API_KEY}`,
+    `-e`,
+    `GITHUB.USER_TOKEN=${GITHUB_TOKEN}`,
     DOCKER_IMAGE,
-    "--pr_url", PR_URL
+    "--pr_url",
+    PR_URL,
   ];
 
   if (ACTION) {

@@ -1,41 +1,59 @@
-# 使い方
+# Deno Scripts
 
-## package.jsonに使いたいコマンドを記載
+様々なシステム更新タスクを実行するためのDenoスクリプト集です。
 
-```
-  "bin": {
-    "pr-agent": "./scripts/pr-agent.mjs",
-    "update-pkg": "./scripts/update-pkg.mjs"
-  },
-```
+## 前提条件
 
-## インストール
-
-```
-brew install zx
+```bash
+# Denoのインストール
+curl -fsSL https://deno.land/install.sh | sh
 ```
 
-```
-npm install -g .
-```
+## 利用可能なスクリプト
+
+### update_package.ts
+
+システム全体のパッケージ更新を並行実行します：
+
+- Node.js グローバルパッケージ
+- Python パッケージ (pip, pipx)
+- Homebrew パッケージ (macOS)
+- APT パッケージ (Linux)
+- Neovim プラグイン
+- Gitリポジトリの更新
+- mise 環境管理ツール
 
 ## 実行方法
 
-```
-% which pr-agent
-/Users/t00114/.mise/installs/node/20/bin/pr-agent
+### タスクコマンド経由
+
+```bash
+deno task update-package
 ```
 
-### pr-agnet
+### 直接実行
 
-事前に各トークンを設定
-
-```
-export OPENAI_API_KEY=XXXXXXXXXX
-export GITHUB_TOKEN=XXXXXXXXXX
+```bash
+./scripts/update_package.ts
 ```
 
+### 必要な権限
+
+スクリプトは以下の権限で実行されます：
+- `--allow-run`: 外部コマンド実行
+- `--allow-env`: 環境変数アクセス  
+- `--allow-read`: ファイル読み取り
+
+## 開発
+
+### フォーマット
+
+```bash
+deno fmt scripts/
 ```
-% pr-agent
-Usage: <PR_URL> [ACTION]
+
+### リント
+
+```bash
+deno lint scripts/
 ```

@@ -1,0 +1,18 @@
+{
+  "tasks": {
+    "pr-agent": "deno run --allow-run --allow-env scripts/pr_agent.ts",
+    "prune-docker": "deno run --allow-run scripts/prune_docker.ts",
+    "update-all": "deno run --allow-run --allow-env --allow-read scripts/update_all.ts",
+    "update-package": "deno run --allow-run --allow-env --allow-read scripts/update_package.ts",
+    "update-mise": "deno run --allow-run scripts/update_mise.ts",
+    "update-nvim-scripts": "deno run --allow-run scripts/update_nvim_scripts.ts"
+  },
+  "fmt": {
+    "include": ["scripts/"],
+    "exclude": ["dist/", "node_modules/"]
+  },
+  "lint": {
+    "include": ["scripts/"],
+    "exclude": ["dist/", "node_modules/"]
+  }
+}
